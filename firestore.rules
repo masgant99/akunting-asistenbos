@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(data) {
+      return isSignedIn() && data.userId == request.auth.uid;
+    }
+
+    // Masters & Transactions
+    match /coa/{coaId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /coas/{coaId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /journals/{journalId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /budgets/{budgetId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /notifications/{notificationId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /scheduledPayments/{paymentId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /budgetTransactions/{txId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+
+    match /apiKeys/{keyId} {
+      allow list: if isSignedIn();
+      allow get: if isOwner(resource.data);
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isOwner(resource.data);
+    }
+  }
+}

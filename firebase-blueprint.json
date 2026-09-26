@@ -1,0 +1,117 @@
+{
+  "entities": {
+    "coa": {
+      "title": "Chart of Accounts",
+      "description": "Master data for accounting accounts",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "description": "Account code (e.g., 1101)" },
+        "name": { "type": "string", "description": "Account name" },
+        "category": { "type": "string", "enum": ["Asset", "Liability", "Equity", "Revenue", "Expense"], "description": "High-level category" },
+        "subCategory": { "type": "string", "description": "Sub-category (e.g., Cash, Accounts Receivable)" },
+        "normalBalance": { "type": "string", "enum": ["Debit", "Credit"] },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "name", "category", "normalBalance"]
+    },
+    "journalEntry": {
+      "title": "Journal Entry",
+      "description": "General journal transaction records",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "reference": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Posted"] },
+        "entries": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "coaId": { "type": "string" }, "debit": { "type": "number" }, "credit": { "type": "number" } } }
+        },
+        "totalDebit": { "type": "number" },
+        "totalCredit": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["date", "entries", "totalDebit", "totalCredit"]
+    },
+    "budget": {
+      "title": "Budget",
+      "description": "Budget allocations for each account period",
+      "type": "object",
+      "properties": {
+        "coaId": { "type": "string" },
+        "period": { "type": "string", "description": "Format YYYY-MM" },
+        "amount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["coaId", "period", "amount"]
+    },
+    "notification": {
+      "title": "Notification",
+      "description": "App notification events",
+      "type": "object",
+      "properties": {
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["Info", "Warning", "Success"] },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["message", "createdAt"]
+    },
+    "scheduledPayment": {
+      "title": "Scheduled Payment",
+      "description": "Payments scheduled for future dates",
+      "type": "object",
+      "properties": {
+        "dueDate": { "type": "string", "format": "date-time" },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "coaId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Paid", "Overdue"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["dueDate", "amount", "coaId"]
+    },
+    "budgetTransaction": {
+      "title": "Budget Transaction",
+      "description": "Increases or decreases to budget allocation and spending logs",
+      "type": "object",
+      "properties": {
+        "coaId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["Pertambahan", "Pengurangan"] },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["coaId", "amount", "type", "description", "date"]
+    },
+    "apiKey": {
+      "title": "API Key & Agent Token",
+      "description": "API keys and tokens for Agentic AI and MCP connections",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Friendly name for the agent (e.g. Cursor, Claude Desktop)" },
+        "key": { "type": "string", "description": "Secret token (lp_live_...)" },
+        "prefix": { "type": "string", "description": "Visible key prefix" },
+        "status": { "type": "string", "enum": ["active", "revoked"] },
+        "userId": { "type": "string" },
+        "permissions": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastUsedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "key", "prefix", "status", "userId"]
+    }
+  },
+  "firestore": {
+    "coa": { "schema": "coa", "description": "Master list of accounting accounts" },
+    "journals": { "schema": "journalEntry", "description": "All journal entries" },
+    "budgets": { "schema": "budget", "description": "Budget definitions per account and period" },
+    "notifications": { "schema": "notification", "description": "System-wide notifications" },
+    "scheduledPayments": { "schema": "scheduledPayment", "description": "Calendar-integrated payments" },
+    "budgetTransactions": { "schema": "budgetTransaction", "description": "Transaction logs of budget increases/decreases" },
+    "apiKeys": { "schema": "apiKey", "description": "Agentic AI MCP API keys" }
+  }
+}

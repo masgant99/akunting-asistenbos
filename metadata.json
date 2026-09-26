@@ -1,0 +1,8 @@
+{
+  "name": "Remix Lentera Akunting",
+  "description": "A comprehensive accounting solution featuring automated journals, ledger tracking, budget monitoring, real-time notifications, and premium reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

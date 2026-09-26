@@ -1,0 +1,135 @@
+{
+  "test-user": {
+    "coas": [
+      {
+        "id": "coa-101",
+        "code": "101",
+        "name": "Kas Utama (Cash)",
+        "category": "Asset",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-102",
+        "code": "102",
+        "name": "Bank BCA Operasional",
+        "category": "Asset",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-103",
+        "code": "103",
+        "name": "Piutang Usaha",
+        "category": "Asset",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-104",
+        "code": "104",
+        "name": "Perlengkapan Kantor",
+        "category": "Asset",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-105",
+        "code": "105",
+        "name": "Peralatan & Aset Tetap",
+        "category": "Asset",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-201",
+        "code": "201",
+        "name": "Utang Usaha (Accounts Payable)",
+        "category": "Liability",
+        "normalBalance": "Credit"
+      },
+      {
+        "id": "coa-202",
+        "code": "202",
+        "name": "Utang Gaji",
+        "category": "Liability",
+        "normalBalance": "Credit"
+      },
+      {
+        "id": "coa-301",
+        "code": "301",
+        "name": "Modal Pemilik (Owner Equity)",
+        "category": "Equity",
+        "normalBalance": "Credit"
+      },
+      {
+        "id": "coa-401",
+        "code": "401",
+        "name": "Pendapatan Jasa / Usaha",
+        "category": "Revenue",
+        "normalBalance": "Credit"
+      },
+      {
+        "id": "coa-501",
+        "code": "501",
+        "name": "Beban Gaji & Upah",
+        "category": "Expense",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-502",
+        "code": "502",
+        "name": "Beban Sewa Kantor",
+        "category": "Expense",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-503",
+        "code": "503",
+        "name": "Beban Listrik, Air & Internet",
+        "category": "Expense",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-504",
+        "code": "504",
+        "name": "Beban Pemasaran & Iklan",
+        "category": "Expense",
+        "normalBalance": "Debit"
+      },
+      {
+        "id": "coa-505",
+        "code": "505",
+        "name": "Beban Perlengkapan Operasional",
+        "category": "Expense",
+        "normalBalance": "Debit"
+      }
+    ],
+    "journals": [
+      {
+        "id": "jrn_agent_1790083938965_5474",
+        "date": "2026-09-22",
+        "description": "Pembayaran sewa kantor oleh AI Agent",
+        "reference": "MCP-2327",
+        "status": "Posted",
+        "entries": [
+          {
+            "coaId": "coa-502",
+            "coaCode": "502",
+            "coaName": "Beban Sewa Kantor",
+            "debit": 3500000,
+            "credit": 0
+          },
+          {
+            "coaId": "coa-101",
+            "coaCode": "101",
+            "coaName": "Kas Utama (Cash)",
+            "debit": 0,
+            "credit": 3500000
+          }
+        ],
+        "totalDebit": 3500000,
+        "totalCredit": 3500000,
+        "userId": "test-user",
+        "source": "agentic_mcp",
+        "createdAt": "2026-09-22T13:32:18.965Z"
+      }
+    ],
+    "lastSyncedAt": "2026-09-22T13:32:18.965Z"
+  }
+}
